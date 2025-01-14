@@ -176,6 +176,39 @@ export default function ProjectDetail() {
               </ul>
             </div>
           )}
+
+          {/* Collage Photo */}
+          {/* {project.slide && project.slide.length > 0 && (
+            <div className="mt-8">
+              <h3 className="text-2xl font-semibold mb-4">Project Gallery</h3>
+              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+                {project.slide.map((image, index) => (
+                  <div
+                    key={index}
+                    className={`relative overflow-hidden rounded-lg ${
+                      index === 0 ? "md:col-span-2 md:row-span-2" : ""
+                    }`}
+                  >
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.1 * index }}
+                      className="group relative h-48 md:h-64 w-full"
+                    >
+                      <Image
+                        width={800}
+                        height={400}
+                        src={image}
+                        alt={`Project slide ${index + 1}`}
+                        className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-300"
+                      />
+                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300" />
+                    </motion.div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )} */}
         </motion.div>
       </div>
     </main>

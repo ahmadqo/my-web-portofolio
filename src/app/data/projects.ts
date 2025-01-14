@@ -44,9 +44,9 @@ export const projects: Project[] = [
     title: "Internet Banking Application",
     description:
       "A comprehensive internet banking platform with features for fund transfers, bill payments, and account management. Implemented using microfrontend architecture for better scalability.",
-    longDescription: `Led the development of a modern internet banking platform that serves millions of users. The application was built with a focus on security, performance, and user experience.
+    longDescription: `Leading the frontend development of a modern internet banking platform serving millions of users. The application is built with a focus on security, performance, and user experience.
 
-The platform features a microfrontend architecture that allows for independent deployment of different modules, reducing deployment risks and improving team autonomy.`,
+The platform has a microfrontend architecture that allows for independent deployment of different modules, reducing deployment risk and increasing team autonomy.`,
     image: "/images/projects/project-banking.png",
     technologies: [
       { name: "React", icon: FaReact },
@@ -83,7 +83,8 @@ The platform features a microfrontend architecture that allows for independent d
     id: "tmdb",
     title: "TMDB Movie App",
     description: "",
-    longDescription: ``,
+    longDescription: `A web-based application integrated with the TMDB API to display a list of movies, including features such as search, category filtering (Now Playing, Popular, Top-Rated, Upcoming), and movie details. 
+    This application was built using React.js and Redux for state management, focusing on performance and a responsive user experience.`,
     image: "/images/projects/project-tmdb-1.png",
     slide: [
       "/images/projects/project-tmdb-1.png",
@@ -109,7 +110,8 @@ The platform features a microfrontend architecture that allows for independent d
     id: "tmdb-mobile",
     title: "TMDB Movie App (Mobile)",
     description: "",
-    longDescription: ``,
+    longDescription: `An Android-based application integrated with the TMDB API, developed using React Native and TypeScript. 
+    The app provides features for movie search and exploration, detailed movie information, and login functionality using Firebase Authentication (Google and email/password). It prioritizes a modern user interface design optimized for various screen sizes.`,
     image: "/images/projects/project-reacnative-1.png",
     slide: [
       "/images/projects/project-reacnative-1.png",
@@ -133,7 +135,8 @@ The platform features a microfrontend architecture that allows for independent d
     id: "estock-tripat",
     title: "E-Stok Tripat",
     description: "",
-    longDescription: ``,
+    longDescription: `A web-based application designed to manage stock in a hospital warehouse, tracking stock entries and exits. Stock exits are processed as requests from specific hospital units to the warehouse. 
+    The system ensures accurate inventory tracking and provides features for managing stock levels, generating reports, and monitoring requests efficiently.`,
     image: "/images/projects/project-estok-tripat-1.png",
     technologies: [
       { name: "Laravel", icon: FaLaravel },
