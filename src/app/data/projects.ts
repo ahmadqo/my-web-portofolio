@@ -82,7 +82,8 @@ The platform has a microfrontend architecture that allows for independent deploy
   {
     id: "tmdb",
     title: "TMDB Movie App",
-    description: "",
+    description:
+      "A web-based application integrated with the TMDB API to display a list of movies, including features such as search, category filtering (Now Playing, Popular, Top-Rated, Upcoming), and movie details.",
     longDescription: `A web-based application integrated with the TMDB API to display a list of movies, including features such as search, category filtering (Now Playing, Popular, Top-Rated, Upcoming), and movie details. 
     This application was built using React.js and Redux for state management, focusing on performance and a responsive user experience.`,
     image: "/images/projects/project-tmdb-1.png",
@@ -109,7 +110,8 @@ The platform has a microfrontend architecture that allows for independent deploy
   {
     id: "tmdb-mobile",
     title: "TMDB Movie App (Mobile)",
-    description: "",
+    description:
+      "An Android-based application integrated with the TMDB API, developed using React Native and TypeScript.",
     longDescription: `An Android-based application integrated with the TMDB API, developed using React Native and TypeScript. 
     The app provides features for movie search and exploration, detailed movie information, and login functionality using Firebase Authentication (Google and email/password). It prioritizes a modern user interface design optimized for various screen sizes.`,
     image: "/images/projects/project-reacnative-1.png",
@@ -134,7 +136,8 @@ The platform has a microfrontend architecture that allows for independent deploy
   {
     id: "estock-tripat",
     title: "E-Stok Tripat",
-    description: "",
+    description:
+      "A web-based application designed to manage stock in a hospital warehouse, tracking stock entries and exits.",
     longDescription: `A web-based application designed to manage stock in a hospital warehouse, tracking stock entries and exits. Stock exits are processed as requests from specific hospital units to the warehouse. 
     The system ensures accurate inventory tracking and provides features for managing stock levels, generating reports, and monitoring requests efficiently.`,
     image: "/images/projects/project-estok-tripat-1.png",
@@ -158,7 +161,7 @@ The platform has a microfrontend architecture that allows for independent deploy
   },
   {
     id: "nextpixel",
-    title: "Next Pixel",
+    title: "Next Pixel Web Profile",
     description: "",
     longDescription: ``,
     image: "/images/projects/project-nextpixel.png",
@@ -181,8 +184,10 @@ The platform has a microfrontend architecture that allows for independent deploy
   {
     id: "sikatrin",
     title: "Sistem Ketertelusuran Karantina Terintegrasi",
-    description: "",
-    longDescription: ``,
+    description:
+      "A traceability system designed to facilitate the traceability of quarantine processes in an integrated and efficient manner.",
+    longDescription: `This system is designed to facilitate the traceability of quarantine processes in an integrated and efficient manner. 
+    It ensures that all quarantine activities, from inspection to release, are accurately recorded and traceable, helping organizations maintain compliance with regulations and improve operational transparency.`,
     image: "/images/projects/project-sikatrin-1.png",
     slide: [
       "/images/projects/project-sikatrin-1.png",
@@ -207,7 +212,7 @@ The platform has a microfrontend architecture that allows for independent deploy
   },
   {
     id: "trust-care-medica",
-    title: "Trust Care Medica",
+    title: "Trust Care Medica Web Profile",
     description: "",
     longDescription: ``,
     image: "/images/projects/project-medica-1.png",
@@ -232,8 +237,10 @@ The platform has a microfrontend architecture that allows for independent deploy
   {
     id: "statistic-sectoral",
     title: "Sistem Statistik Sektor",
-    description: "",
-    longDescription: ``,
+    description:
+      "This application is designed to record, manage, and analyze regional statistical data.",
+    longDescription: `This application is designed to record, manage, and analyze regional statistical data. 
+    With its user-friendly features, it helps local governments and related agencies monitor the development of social, economic, and demographic indicators.`,
     image: "/images/projects/project-statissectoral-1.png",
     slide: [
       "/images/projects/project-statissectoral-1.png",
@@ -283,8 +290,10 @@ The platform has a microfrontend architecture that allows for independent deploy
   {
     id: "e-archive",
     title: "Sistem Informasi Arsip",
-    description: "",
-    longDescription: ``,
+    description:
+      "A digital platform to record, manage, and store archives in an organized manner.",
+    longDescription: `A digital platform to record, manage, and store archives in an organized manner. 
+    This application assists institutions or companies in efficiently and securely managing important documents.`,
     image: "/images/projects/project-e-archive-1.png",
     slide: [
       "/images/projects/project-e-archive-1.png",
@@ -337,8 +346,10 @@ The platform has a microfrontend architecture that allows for independent deploy
   {
     id: "s-detect",
     title: "Sistem Deteksi Kemiripan Judul Skripsi",
-    description: "",
-    longDescription: ``,
+    description:
+      "This application helps students and lecturers detect the similarity level of thesis titles with those already in the database.",
+    longDescription: `This application helps students and lecturers detect the similarity level of thesis titles with those already in the database. 
+    The system is useful for preventing idea duplication and enhancing the originality of academic works.`,
     image: "/images/projects/project-sdetect-1.png",
     slide: [
       "/images/projects/project-sdetect-1.png",
@@ -364,8 +375,10 @@ The platform has a microfrontend architecture that allows for independent deploy
   {
     id: "pos-rajawali",
     title: "Sistem Informasi Pencatatan Operasional",
-    description: "",
-    longDescription: ``,
+    description:
+      "A system developed to record and manage daily operational activities efficiently.",
+    longDescription: `A system developed to record and manage daily operational activities efficiently. 
+    It helps organizations streamline operational processes, track resources, and generate reports for better decision-making.`,
     image: "/images/projects/project-rajawali.png",
     technologies: [
       { name: "Laravel", icon: FaLaravel },
@@ -432,8 +445,10 @@ The system includes automated approval workflows, real-time reporting dashboards
   {
     id: "simplify",
     title: "Simplify Project Management",
-    description: "",
-    longDescription: ``,
+    description:
+      "A project management tool designed to monitor progress, manage tasks, and ensure timely completion of deliverables.",
+    longDescription: `This application is designed to monitor project progress, manage tasks, and ensure timely completion of deliverables. 
+    It provides an overview of project timelines, milestones, and team performance, enabling better project management and decision-making.`,
     image: "/images/projects/project-simplify.png",
     technologies: [
       { name: "Spring Boot", icon: SiSpring },
