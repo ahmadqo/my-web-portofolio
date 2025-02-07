@@ -47,7 +47,7 @@ export const projects: Project[] = [
     longDescription: `Leading the frontend development of a modern internet banking platform serving millions of users. The application is built with a focus on security, performance, and user experience.
 
 The platform has a microfrontend architecture that allows for independent deployment of different modules, reducing deployment risk and increasing team autonomy.`,
-    image: "/images/projects/project-banking.png",
+    image: "",
     technologies: [
       { name: "React", icon: FaReact },
       { name: "MUI (Material-UI)", icon: SiMui },
