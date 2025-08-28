@@ -13,6 +13,9 @@ import {
   SiSpring,
   SiHtml5,
   SiAxios,
+  SiGraphql,
+  SiHasura,
+  SiTurborepo,
 } from "react-icons/si";
 
 export interface Technology {
@@ -39,6 +42,31 @@ export interface Project {
 }
 
 export const projects: Project[] = [
+  {
+    id: "sitama",
+    title: " Sistem Informasi Tabligh Muhammadiyah (SITAMA)",
+    description: "",
+    longDescription: `Sistem Informasi Mubalig, Masjid/Musala, dan Pengajian Muhammadiyah/Aisyiyah beserta semua organisasi otonom Muhammadiyah.`,
+    image: "/images/projects/project-sitama.png",
+    technologies: [
+      { name: "Next.js", icon: FaReact },
+      { name: "Tailwind CSS", icon: SiTailwindcss },
+      { name: "Typescript", icon: SiTypescript },
+      { name: "Hasura", icon: SiHasura },
+      { name: "GraphQL", icon: SiGraphql },
+      { name: "GraphQL", icon: SiGraphql },
+      { name: "Turborepo", icon: SiTurborepo },
+      { name: "Axios", icon: SiAxios },
+    ],
+    role: "Frontend Developer",
+    teamSize: 3,
+    duration: "4 months",
+    year: 2025,
+    featured: true,
+    challenges: [],
+    solutions: [],
+    impact: [],
+  },
   {
     id: "internet-banking",
     title: "Internet Banking Application",

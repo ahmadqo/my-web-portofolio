@@ -115,13 +115,13 @@ export default function ProjectDetail() {
             </h2>
             <div className="flex flex-wrap gap-4">
               {project.technologies.map((tech, index) => {
-                const Icon = tech.icon;
+                const Icon = tech.icon ?? null;
                 return (
                   <div
                     key={index}
                     className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full"
                   >
-                    <Icon className="text-blue-500" />
+                    {Icon && <Icon className="text-blue-500" />}
                     <span>{tech.name}</span>
                   </div>
                 );

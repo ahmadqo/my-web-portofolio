@@ -78,13 +78,13 @@ export default function Projects() {
 
                   <div className="flex flex-wrap gap-3">
                     {project.technologies.map((tech, techIndex) => {
-                      const Icon = tech.icon;
+                      const Icon = tech.icon ?? null;
                       return (
                         <div
                           key={techIndex}
                           className="flex items-center gap-1 text-sm text-gray-600"
                         >
-                          <Icon className="text-blue-500" />
+                          {Icon && <Icon className="text-blue-500" />}
                           <span>{tech.name}</span>
                         </div>
                       );
