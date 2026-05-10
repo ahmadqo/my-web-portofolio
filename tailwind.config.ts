@@ -8,6 +8,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        jakarta: ["var(--font-jakarta)"],
+      },
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",

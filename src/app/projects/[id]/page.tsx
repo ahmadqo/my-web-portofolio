@@ -1,34 +1,46 @@
 "use client";
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { useParams, useRouter } from "next/navigation";
 import { projects } from "@/app/data/projects";
-import { FaArrowLeft, FaUsers, FaClock, FaCalendarAlt } from "react-icons/fa";
+import {
+  ArrowLeft,
+  Users,
+  Clock,
+  Calendar,
+  ChevronRight,
+  ExternalLink,
+  Zap,
+  Target,
+  Trophy,
+} from "lucide-react";
 import Image from "next/image";
+import { FaGithub } from "react-icons/fa";
 
 export default function ProjectDetail() {
   const router = useRouter();
   const { id } = useParams();
   const project = projects.find((p) => p.id === id);
-
   const [imageError, setImageError] = useState(false);
+  const [mounted, setMounted] = useState(false);
 
-  const handleImageError = () => {
-    setImageError(true);
-  };
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
+  if (!mounted) return null;
 
   if (!project) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <div className="text-center">
-          <h1 className="text-2xl font-bold text-gray-800 mb-4">
-            Project not found
-          </h1>
+      <div className="min-h-screen flex items-center justify-center bg-background">
+        <div className="text-center p-8 glass-card rounded-3xl">
+          <h1 className="text-3xl font-bold mb-4">Project not found</h1>
           <button
-            onClick={() => router.back()}
-            className="text-blue-500 hover:text-blue-600 flex items-center gap-2"
+            onClick={() => router.push("/")}
+            className="px-6 py-2 bg-blue-500 text-white rounded-full hover:bg-blue-600 transition-colors inline-flex items-center gap-2"
           >
-            <FaArrowLeft /> Go Back
+            <ArrowLeft size={18} /> Back to Home
           </button>
         </div>
       </div>
@@ -36,211 +48,217 @@ export default function ProjectDetail() {
   }
 
   return (
-    <main className="min-h-screen pt-24 pb-12">
-      <div className="container mx-auto px-4">
+    <main className="min-h-screen pt-32 pb-20 px-6 bg-background">
+      <div className="max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          className="max-w-4xl mx-auto"
+          transition={{ duration: 0.8 }}
         >
-          {/* Back Button */}
+          {/* Header */}
           <button
             onClick={() => router.back()}
-            className="mb-8 flex items-center gap-2 text-gray-600 hover:text-blue-500 transition-colors"
+            className="group mb-8 flex items-center gap-2 text-muted-foreground hover:text-blue-500 transition-colors font-medium"
           >
-            <FaArrowLeft /> Back to Projects
+            <ArrowLeft
+              size={18}
+              className="group-hover:-translate-x-1 transition-transform"
+            />
+            Back to Projects
           </button>
 
-          {/* Project Title */}
-          <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6">
-            {project.title}
-          </h1>
+          <div className="flex flex-col md:flex-row justify-between items-start gap-8 mb-12">
+            <div className="max-w-2xl">
+              <h1 className="text-4xl md:text-6xl font-extrabold mb-6 tracking-tight">
+                {project.title.trim()}
+              </h1>
+              <div className="flex flex-wrap gap-4 text-muted-foreground">
+                <div className="flex items-center gap-2 px-3 py-1 glass rounded-full text-xs font-bold uppercase tracking-widest">
+                  <Users size={14} className="text-blue-500" />
+                  {project.teamSize} Members
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1 glass rounded-full text-xs font-bold uppercase tracking-widest">
+                  <Clock size={14} className="text-blue-500" />
+                  {project.duration}
+                </div>
+                <div className="flex items-center gap-2 px-3 py-1 glass rounded-full text-xs font-bold uppercase tracking-widest">
+                  <Calendar size={14} className="text-blue-500" />
+                  {project.year}
+                </div>
+              </div>
+            </div>
 
-          {/* Project Meta */}
-          <div className="flex flex-wrap gap-6 mb-8 text-gray-600">
-            <div className="flex items-center gap-2">
-              <FaUsers className="text-blue-500" />
-              <span>Team Size: {project.teamSize}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaClock className="text-blue-500" />
-              <span>Duration: {project.duration}</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <FaCalendarAlt className="text-blue-500" />
-              <span>Year: {project.year}</span>
+            <div className="flex gap-3">
+              <a
+                href="#"
+                className="p-4 glass rounded-full hover:bg-blue-500 hover:text-white transition-all shadow-xl"
+              >
+                <FaGithub size={24} />
+              </a>
+              <a
+                href="#"
+                className="p-4 bg-blue-600 text-white rounded-full hover:bg-blue-700 transition-all shadow-xl shadow-blue-500/20"
+              >
+                <ExternalLink size={24} />
+              </a>
             </div>
           </div>
 
-          {/* Project Image */}
-          <div className="mb-12 rounded-xl overflow-hidden shadow-lg">
+          {/* Featured Image */}
+          <div className="relative aspect-video w-full mb-16 rounded-[2.5rem] overflow-hidden glass border-8 border-white/5 shadow-2xl">
             {imageError || !project.image ? (
-              <div className="w-full h-full flex items-center justify-center bg-gray-100  min-h-80">
-                <div className="text-center">
-                  <svg
-                    className="mx-auto h-12 w-12 text-gray-400"
-                    fill="none"
-                    viewBox="0 0 24 24"
-                    stroke="currentColor"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth={2}
-                      d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"
-                    />
-                  </svg>
-                  <p className="mt-2 text-sm text-gray-500">
-                    Image not available
-                  </p>
-                </div>
+              <div className="w-full h-full flex items-center justify-center bg-foreground/5">
+                <span className="text-muted-foreground font-medium uppercase tracking-widest">
+                  Preview not available
+                </span>
               </div>
             ) : (
               <Image
                 src={project.image}
                 alt={project.title}
-                width={800}
-                height={400}
-                className="w-full h-auto max-h-[40rem] object-contain group-hover:scale-105 transition-transform duration-300"
-                onError={handleImageError}
+                fill
+                className="object-cover"
+                onError={() => setImageError(true)}
               />
             )}
           </div>
 
-          {/* Technologies */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">
-              Technologies Used
-            </h2>
-            <div className="flex flex-wrap gap-4">
-              {project.technologies.map((tech, index) => {
-                const Icon = tech.icon ?? null;
-                return (
-                  <div
-                    key={index}
-                    className="flex items-center gap-2 px-4 py-2 bg-gray-100 rounded-full"
-                  >
-                    {Icon && <Icon className="text-blue-500" />}
-                    <span>{tech.name}</span>
-                  </div>
-                );
-              })}
-            </div>
-          </div>
-
-          {/* Project Description */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">Overview</h2>
-            <div className="prose max-w-none">
-              {project.longDescription.split("\n\n").map((paragraph, index) => (
-                <p key={index} className="mb-4 text-gray-600 leading-relaxed">
-                  {paragraph}
-                </p>
-              ))}
-            </div>
-          </div>
-
-          {/* Role */}
-          <div className="mb-12">
-            <h2 className="text-2xl font-bold text-gray-800 mb-4">My Role</h2>
-            <p className="text-gray-600">{project.role}</p>
-          </div>
-
-          {/* Challenges and Solutions */}
-          <div className="grid md:grid-cols-2 gap-8 mb-12">
-            {project?.challenges && project.challenges.length > 0 && (
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  Challenges
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-16">
+            {/* Main Content */}
+            <div className="lg:col-span-2 space-y-12">
+              <section>
+                <h2 className="text-2xl font-bold mb-6 flex items-center gap-3">
+                  <div className="w-8 h-1 bg-blue-500 rounded-full" />
+                  Overview
                 </h2>
-                <ul className="space-y-3">
-                  {project.challenges.map((challenge, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start gap-2 text-gray-600"
-                    >
-                      <span className="text-blue-500 mt-1.5">•</span>
-                      {challenge}
-                    </li>
+                <div className="text-muted-foreground text-lg leading-relaxed space-y-6">
+                  {project.longDescription.split("\n\n").map((p, i) => (
+                    <p key={i}>{p}</p>
                   ))}
-                </ul>
-              </div>
-            )}
-            {project?.solutions && project.solutions.length > 0 && (
-              <div>
-                <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                  Solutions
-                </h2>
-                <ul className="space-y-3">
-                  {project.solutions.map((solution, index) => (
-                    <li
-                      key={index}
-                      className="flex items-start gap-2 text-gray-600"
-                    >
-                      <span className="text-green-500 mt-1.5">•</span>
-                      {solution}
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            )}
-          </div>
+                </div>
+              </section>
 
-          {/* Impact */}
-          {project?.impact && project.impact.length > 0 && (
-            <div>
-              <h2 className="text-2xl font-bold text-gray-800 mb-4">
-                Project Impact
-              </h2>
-              <ul className="space-y-3">
-                {project.impact.map((impact, index) => (
-                  <li
-                    key={index}
-                    className="flex items-start gap-2 text-gray-600"
-                  >
-                    <span className="text-purple-500 mt-1.5">•</span>
-                    {impact}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          )}
-
-          {/* Collage Photo */}
-          {/* {project.slide && project.slide.length > 0 && (
-            <div className="mt-8">
-              <h3 className="text-2xl font-semibold mb-4">Project Gallery</h3>
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
-                {project.slide.map((image, index) => (
-                  <div
-                    key={index}
-                    className={`relative overflow-hidden rounded-lg ${
-                      index === 0 ? "md:col-span-2 md:row-span-2" : ""
-                    }`}
-                  >
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: 0.1 * index }}
-                      className="group relative h-48 md:h-64 w-full"
-                    >
-                      <Image
-                        width={800}
-                        height={400}
-                        src={image}
-                        alt={`Project slide ${index + 1}`}
-                        className="object-cover w-full h-full transform group-hover:scale-110 transition-transform duration-300"
-                      />
-                      <div className="absolute inset-0 bg-black bg-opacity-0 group-hover:bg-opacity-30 transition-opacity duration-300" />
-                    </motion.div>
+              {project.challenges && project.challenges.length > 0 && (
+                <section className="grid md:grid-cols-2 gap-8">
+                  <div className="glass-card p-8 rounded-3xl">
+                    <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-blue-500">
+                      <Zap size={20} /> Challenges
+                    </h3>
+                    <ul className="space-y-4">
+                      {project.challenges.map((c, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-3 text-sm text-muted-foreground"
+                        >
+                          <ChevronRight
+                            size={16}
+                            className="text-blue-500 mt-0.5 flex-shrink-0"
+                          />
+                          {c}
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                ))}
+                  <div className="glass-card p-8 rounded-3xl bg-blue-500/5 border-blue-500/10">
+                    <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-green-500">
+                      <Target size={20} /> Solutions
+                    </h3>
+                    <ul className="space-y-4">
+                      {project.solutions.map((s, i) => (
+                        <li
+                          key={i}
+                          className="flex items-start gap-3 text-sm text-muted-foreground"
+                        >
+                          <ChevronRight
+                            size={16}
+                            className="text-green-500 mt-0.5 flex-shrink-0"
+                          />
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </section>
+              )}
+
+              {project.impact && project.impact.length > 0 && (
+                <section className="glass-card p-8 rounded-3xl border-purple-500/10 bg-purple-500/5">
+                  <h3 className="text-xl font-bold mb-6 flex items-center gap-2 text-purple-500">
+                    <Trophy size={20} /> Key Impacts
+                  </h3>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {project.impact.map((imp, i) => (
+                      <div
+                        key={i}
+                        className="flex items-center gap-3 p-4 glass rounded-2xl text-sm"
+                      >
+                        <CheckCircle2 size={18} className="text-purple-500" />
+                        {imp}
+                      </div>
+                    ))}
+                  </div>
+                </section>
+              )}
+            </div>
+
+            {/* Sidebar */}
+            <div className="space-y-10">
+              <div className="glass-card p-8 rounded-3xl">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-6">
+                  Tech Stack
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies.map((tech, i) => {
+                    const Icon = tech.icon;
+                    return (
+                      <div
+                        key={i}
+                        className="flex items-center gap-2 px-4 py-2 glass rounded-xl text-sm font-medium"
+                      >
+                        {Icon && <Icon size={16} className="text-blue-500" />}
+                        {tech.name}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="glass-card p-8 rounded-3xl">
+                <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground mb-4">
+                  My Role
+                </h3>
+                <p className="text-lg font-bold">{project.role}</p>
               </div>
             </div>
-          )} */}
+          </div>
         </motion.div>
       </div>
     </main>
+  );
+}
+
+function CheckCircle2({
+  size,
+  className,
+}: {
+  size: number;
+  className: string;
+}) {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width={size}
+      height={size}
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+    >
+      <path d="M12 22c5.523 0 10-4.477 10-10S17.523 2 12 2 2 6.477 2 12s4.477 10 10 10z" />
+      <path d="m9 12 2 2 4-4" />
+    </svg>
   );
 }

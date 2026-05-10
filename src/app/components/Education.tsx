@@ -1,141 +1,121 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaGraduationCap, FaCalendarAlt, FaMapMarkerAlt, FaStar } from "react-icons/fa";
+import {
+  GraduationCap,
+  Calendar,
+  Star,
+  MapPin,
+  CheckCircle2,
+} from "lucide-react";
+
+const educationData = {
+  school: "STMIK Akakom Yogyakarta (UTDI)",
+  degree: "Bachelor of Computer Science",
+  field: "Computer Science",
+  year: "Sep 2014 - Nov 2018",
+  location: "D.I.Yogyakarta, Indonesia",
+  gpa: "3.65/4.00",
+  description:
+    "Focused on programming, systems analysis, and application development for web and mobile.",
+  achievements: [
+    "Proficient in Java, Python, and JavaScript for software development",
+    "Experienced in requirements analysis and application testing",
+    "Specialized in web and mobile application development",
+  ],
+};
 
 export default function Education() {
-  const educationData = {
-    school: "STMIK Akakom Yogyakarta (UTDI)",
-    degree: "Bachelor of Computer Science",
-    field: "Computer Science",
-    year: "Sep 2014 - Nov 2018",
-    location: "D.I.Yogyakarta, Indonesia",
-    gpa: "3.65/4.00",
-    description: "Focused on programming, systems analysis, and application development for web and mobile.",
-    achievements: [
-      "Proficient in Java, Python, and JavaScript for software development",
-      "Experienced in requirements analysis and application testing to ensure quality and performance",
-      "Specialized in web and mobile application development"
-    ]
-  };
-
   return (
-    <section id="education" className="py-24 bg-gray-50">
-      <div className="container mx-auto px-4">
+    <section id="education" className="py-20 px-6">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-16">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-blue-500 font-semibold tracking-wider uppercase text-sm"
+          >
+            Academic Background
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl font-bold mt-2"
+          >
+            My <span className="gradient-text">Education</span>
+          </motion.h2>
+        </div>
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           viewport={{ once: true }}
-          className="max-w-6xl mx-auto"
+          className="glass-card p-8 md:p-12 rounded-[2.5rem] relative overflow-hidden"
         >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent mb-8 text-center">
-            Education
-          </h2>
-
-          {/* Desktop View */}
-          <div className="hidden md:block">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-white p-8 rounded-xl shadow-lg border border-gray-100"
-            >
-              <div className="flex items-start gap-4">
-                <div className="flex-shrink-0 p-3 bg-blue-100 rounded-lg">
-                  <FaGraduationCap className="text-3xl text-blue-500" />
-                </div>
-
-                <div className="flex-grow">
-                  <h3 className="text-2xl font-bold text-gray-800 mb-2">
-                    {educationData.school}
-                  </h3>
-                  <p className="text-gray-600 mb-2 flex items-center gap-2">
-                    <FaCalendarAlt className="text-blue-500" />
-                    {educationData.year}
-                  </p>
-                  <p className="text-gray-600 mb-4 flex items-center gap-2">
-                    <FaStar className="text-blue-500" />
-                    GPA: {educationData.gpa}
-                  </p>
-
-                  <div className="space-y-3 text-gray-700">
-                    <p className="font-medium">
-                      {educationData.degree} in {educationData.field}
-                    </p>
-                    <ul className="space-y-2 list-disc list-inside ml-4">
-                      {educationData.achievements.map((achievement, index) => (
-                        <li key={index}>{achievement}</li>
-                      ))}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
+          {/* Decorative Icon in background */}
+          <div className="absolute -right-8 -top-8 text-blue-500/5 rotate-12">
+            <GraduationCap size={200} />
           </div>
 
-          {/* Mobile View */}
-          <div className="md:hidden">
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5 }}
-              className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"
-            >
-              <div className="p-6">
-                {/* Header */}
-                <div className="flex flex-col mb-4">
-                  <div className="flex-1">
-                    <div className="flex items-center gap-3 mb-2">
-                      <FaGraduationCap className="text-2xl text-blue-500 flex-shrink-0" />
-                      <h3 className="text-xl font-bold text-gray-900">
-                        {educationData.school}
-                      </h3>
-                    </div>
-                    <p className="text-lg font-semibold text-gray-700 mb-1">
-                      {educationData.degree} in {educationData.field}
-                    </p>
-                  </div>
-                  
-                  <div className="flex flex-col mt-2 space-y-1">
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <FaCalendarAlt className="text-blue-500" />
-                      <span>{educationData.year}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <FaMapMarkerAlt className="text-blue-500" />
-                      <span>{educationData.location}</span>
-                    </div>
-                    <div className="flex items-center gap-2 text-gray-600">
-                      <FaStar className="text-blue-500" />
-                      <span>GPA: {educationData.gpa}</span>
-                    </div>
-                  </div>
+          <div className="relative z-10">
+            <div className="flex flex-col md:flex-row md:items-center justify-between gap-6 mb-8">
+              <div className="flex items-center gap-4">
+                <div className="p-4 bg-blue-500 rounded-2xl text-white shadow-lg shadow-blue-500/20">
+                  <GraduationCap size={32} />
                 </div>
-
-                {/* Description */}
-                <div className="mt-4">
-                  <p className="text-gray-600 mb-4">
-                    {educationData.description}
+                <div>
+                  <h3 className="text-2xl font-bold">{educationData.school}</h3>
+                  <p className="text-blue-500 font-medium">
+                    {educationData.degree}
                   </p>
-                  
-                  {/* Achievements */}
-                  <div className="space-y-2">
-                    <h4 className="font-semibold text-gray-800">Key Achievements:</h4>
-                    <ul className="list-none space-y-2">
-                      {educationData.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-start gap-2">
-                          <span className="text-blue-500 mt-1.5">•</span>
-                          <span className="text-gray-600">{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
                 </div>
               </div>
-            </motion.div>
-          </div>
 
+              <div className="flex flex-col gap-2 text-sm text-muted-foreground">
+                <div className="flex items-center gap-2">
+                  <Calendar size={16} className="text-blue-500" />
+                  {educationData.year}
+                </div>
+                <div className="flex items-center gap-2">
+                  <MapPin size={16} className="text-blue-500" />
+                  {educationData.location}
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 pt-8 border-t border-border">
+              <div className="md:col-span-2">
+                <h4 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <CheckCircle2 size={20} className="text-blue-500" />
+                  Key Achievements
+                </h4>
+                <ul className="space-y-4">
+                  {educationData.achievements.map((achievement, index) => (
+                    <li
+                      key={index}
+                      className="flex items-start gap-3 text-muted-foreground"
+                    >
+                      <div className="w-1.5 h-1.5 rounded-full bg-blue-500 mt-2 flex-shrink-0" />
+                      {achievement}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="glass-card p-6 rounded-3xl bg-blue-500/5 border-blue-500/10 flex flex-col items-center justify-center text-center">
+                <Star
+                  size={32}
+                  className="text-blue-500 mb-2 fill-blue-500/20"
+                />
+                <span className="text-3xl font-black text-foreground">
+                  {educationData.gpa}
+                </span>
+                <span className="text-xs uppercase tracking-widest text-muted-foreground font-bold mt-1">
+                  GPA Score
+                </span>
+              </div>
+            </div>
+          </div>
         </motion.div>
       </div>
     </section>
