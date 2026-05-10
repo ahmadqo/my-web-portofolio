@@ -4,165 +4,174 @@ import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { useTheme } from "next-themes";
+import {
+  Home,
+  User,
+  Cpu,
+  Briefcase,
+  Layout,
+  GraduationCap,
+  Mail,
+  Sun,
+  Moon,
+} from "lucide-react";
 
-const navVariants = {
-  hidden: { opacity: 0, y: -20 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: {
-      duration: 0.5,
-      ease: "easeOut",
-    },
-  },
-};
+const menuItems = [
+  { href: "#home", label: "Home", icon: Home },
+  { href: "#about", label: "About", icon: User },
+  { href: "#skills", label: "Skills", icon: Cpu },
+  { href: "#experience", label: "Experience", icon: Briefcase },
+  { href: "#projects", label: "Projects", icon: Layout },
+  { href: "#education", label: "Education", icon: GraduationCap },
+  { href: "#contact", label: "Contact", icon: Mail },
+];
 
 export default function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [isOpen, setIsOpen] = useState(false);
+  const [activeSection, setActiveSection] = useState("home");
+  const { theme, setTheme } = useTheme();
+  const [mounted, setMounted] = useState(false);
   const router = useRouter();
   const pathname = usePathname();
 
   useEffect(() => {
+    setMounted(true);
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 50);
+
+      // Update active section based on scroll
+      const sections = menuItems.map((item) => item.href.substring(1));
+      for (const section of sections.reverse()) {
+        const element = document.getElementById(section);
+        if (element && element.getBoundingClientRect().top <= 100) {
+          setActiveSection(section);
+          break;
+        }
+      }
     };
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const menuItems = [
-    { href: "#home", label: "Home" },
-    { href: "#about", label: "About" },
-    { href: "#skills", label: "Skills" },
-    { href: "#experience", label: "Experience" },
-    { href: "#projects", label: "Projects" },
-    { href: "#education", label: "Education" },
-    { href: "#contact", label: "Contact" },
-  ];
-
   const handleNavClick = (href: string) => {
-    setIsOpen(false); // Close mobile menu when clicking a link
-    // Jika berada di halaman detail project, kembali ke halaman utama
-    if (pathname.startsWith("/projects")) {
+    const sectionId = href.substring(1);
+    setActiveSection(sectionId);
+
+    if (pathname !== "/") {
       router.push("/");
-      // Tunggu navigasi selesai sebelum scroll
       setTimeout(() => {
-        const element = document.querySelector(href);
-        if (element) {
-          element.scrollIntoView({ behavior: "smooth" });
-        }
+        const element = document.getElementById(sectionId);
+        if (element) element.scrollIntoView({ behavior: "smooth" });
       }, 100);
     } else {
-      // Jika sudah di halaman utama, langsung scroll
-      const element = document.querySelector(href);
-      if (element) {
-        element.scrollIntoView({ behavior: "smooth" });
-      }
+      const element = document.getElementById(sectionId);
+      if (element) element.scrollIntoView({ behavior: "smooth" });
     }
   };
 
+  if (!mounted) return null;
+
   return (
-    <motion.nav
-      variants={navVariants}
-      initial="hidden"
-      animate="visible"
-      className={`w-full fixed top-0 z-50 transition-all duration-300 ${
-        isScrolled
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-md shadow-lg dark:text-white"
-          : ""
-      }`}
-    >
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex-shrink-0">
-            <Link href="/" className="text-xl font-bold">
-              Ahmad Qomaruddin
-            </Link>
-          </div>
-
-          {/* Desktop Menu */}
-          <div className="hidden md:block">
-            <div className="ml-10 flex items-baseline space-x-4">
-              {menuItems.map((item) => (
-                <button
-                  key={item.href}
-                  onClick={() => handleNavClick(item.href)}
-                  className="px-3 py-2 rounded-md text-sm font-medium hover:bg-gray-100 hover:text-white dark:hover:bg-gray-800 transition-all duration-300"
-                >
-                  {item.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Mobile menu button */}
-          <div className="md:hidden">
-            <button
-              onClick={() => setIsOpen(!isOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white"
-            >
-              <span className="sr-only">Open main menu</span>
-              {/* Menu icon */}
-              <svg
-                className={`${isOpen ? "hidden" : "block"} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M4 6h16M4 12h16M4 18h16"
-                />
-              </svg>
-              {/* Close icon */}
-              <svg
-                className={`${isOpen ? "block" : "hidden"} h-6 w-6`}
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-                aria-hidden="true"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M6 18L18 6M6 6l12 12"
-                />
-              </svg>
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile menu */}
-      <motion.div
-        className={`${isOpen ? "block" : "hidden"} md:hidden`}
-        initial={false}
-        animate={isOpen ? "open" : "closed"}
-        variants={{
-          open: { opacity: 1, height: "auto" },
-          closed: { opacity: 0, height: 0 },
-        }}
+    <>
+      {/* Desktop Navigation */}
+      <motion.nav
+        initial={{ y: -100 }}
+        animate={{ y: 0 }}
+        className={`fixed top-0 left-0 right-0 z-50 hidden md:block transition-all duration-300 ${
+          isScrolled ? "py-4" : "py-6"
+        }`}
       >
-        <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-          {menuItems.map((item) => (
+        <div className="max-w-5xl mx-auto px-6">
+          <div
+            className={`glass rounded-full px-6 py-2 flex items-center justify-between ${
+              isScrolled
+                ? "shadow-lg border-white/20"
+                : "bg-transparent border-transparent"
+            }`}
+          >
+            <Link href="/" className="text-lg font-bold gradient-text">
+              AQ.
+            </Link>
+
+            <div className="flex items-center gap-1">
+              {menuItems.map((item) => {
+                const sectionId = item.href.substring(1);
+                const isActive = activeSection === sectionId;
+
+                return (
+                  <button
+                    key={item.href}
+                    onClick={() => handleNavClick(item.href)}
+                    className={`relative px-4 py-2 text-sm font-medium transition-colors ${
+                      isActive
+                        ? "text-blue-500"
+                        : "text-foreground/60 hover:text-foreground"
+                    }`}
+                  >
+                    {item.label}
+                    {isActive && (
+                      <motion.div
+                        layoutId="activeTab"
+                        className="absolute inset-0 bg-blue-500/10 rounded-full -z-10"
+                        transition={{
+                          type: "spring",
+                          bounce: 0.2,
+                          duration: 0.6,
+                        }}
+                      />
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+
             <button
-              key={item.href}
-              onClick={() => handleNavClick(item.href)}
-              className="block w-full text-left px-3 py-2 rounded-md text-base font-medium hover:bg-gray-100 dark:hover:bg-gray-800 transition-all duration-300"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-full hover:bg-foreground/5 transition-colors"
             >
-              {item.label}
+              {theme === "dark" ? <Sun size={20} /> : <Moon size={20} />}
             </button>
-          ))}
+          </div>
         </div>
-      </motion.div>
-    </motion.nav>
+      </motion.nav>
+
+      {/* Mobile Bottom Navigation */}
+      <nav className="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[90%] max-w-md md:hidden">
+        <div className="glass rounded-2xl px-4 py-3 flex items-center justify-around shadow-2xl border-white/20">
+          {menuItems.slice(0, 5).map((item) => {
+            const sectionId = item.href.substring(1);
+            const isActive = activeSection === sectionId;
+            const Icon = item.icon;
+
+            return (
+              <button
+                key={item.href}
+                onClick={() => handleNavClick(item.href)}
+                className={`relative p-2 transition-colors ${
+                  isActive ? "text-blue-500" : "text-foreground/60"
+                }`}
+              >
+                <Icon size={24} />
+                {isActive && (
+                  <motion.div
+                    layoutId="activeTabMobile"
+                    className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-blue-500 rounded-full"
+                  />
+                )}
+              </button>
+            );
+          })}
+
+          <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="p-2 text-foreground/60"
+          >
+            {theme === "dark" ? <Sun size={24} /> : <Moon size={24} />}
+          </button>
+        </div>
+      </nav>
+    </>
   );
 }

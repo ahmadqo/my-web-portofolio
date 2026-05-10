@@ -1,202 +1,147 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { FaBriefcase, FaCalendarAlt, FaMapMarkerAlt } from "react-icons/fa";
+import { Briefcase, Calendar, MapPin, ChevronRight } from "lucide-react";
+
+const experiences = [
+  {
+    company: "PT. Infosys Solusi Terpadu",
+    role: "Frontend Developer",
+    period: "Feb 2022 - Present",
+    location: "Jakarta, Indonesia",
+    description:
+      "Leading innovative digital solutions in the Financial Services Industry and public sector.",
+    responsibilities: [
+      "Led 4+ frontend teams in designing, developing, and maintaining scalable and secure internet banking applications",
+      "Managed 14+ microfrontend modules to ensure integration, consistency, and scalability",
+      "Implemented key features such as registration, transfer, payment, and portal management",
+      "Enhanced application performance through code splitting, lazy loading, and caching",
+      "Applied microfrontend architecture using React.js for improved modularity",
+    ],
+    technologies: [
+      "React.js",
+      "Microfrontend",
+      "Redux",
+      "REST API",
+      "TypeScript",
+    ],
+  },
+  {
+    company: "PT. Astra Graphia Information Technology (AGIT)",
+    role: "Web Developer",
+    period: "Mar 2019 - Feb 2022",
+    location: "Jakarta Pusat, Indonesia",
+    description:
+      "Digital Service Provider offering one-stop solutions on Digital Services.",
+    responsibilities: [
+      "Developed frontend and backend applications using React.js, Java Spring Boot, and PostgreSQL",
+      "Worked on high-impact projects like TRAC Service Apps and Merchant Systems",
+      "Mentored junior developers and conducted thorough code reviews",
+      "Implemented performance optimization for production-ready applications",
+    ],
+    technologies: [
+      "React.js",
+      "Java Spring Boot",
+      "PostgreSQL",
+      "Redux",
+      "Bootstrap",
+    ],
+  },
+];
 
 export default function Experience() {
-  const experiences = [
-    {
-      company: "PT. Infosys Solusi Terpadu",
-      role: "Frontend Developer",
-      period: "Feb 2022 - Present",
-      location: "Jakarta, Indonesia",
-      description:
-        "A company primarily focused on providing innovative digital solutions in the Financial Services Industry, public sector, telecommunications industry, and other industries.",
-      responsibilities: [
-        "Led 4+ frontend teams in designing, developing, and maintaining scalable and secure internet banking applications",
-        "Managed 14+ microfrontend modules to ensure integration, consistency, and scalability",
-        "Collaborated with backend developers, business analysts, QA, and UI/UX designers to align technical execution with business needs",
-        "Implemented key features such as registration, transfer, payment, and portal management",
-        "Enhanced application performance through performance optimization techniques such as code splitting, lazy loading, and caching",
-        "Applied microfrontend architecture using React.js for improved modularity and maintainability",
-        "Provided technical guidance to the team, improving code quality and reducing production issues",
-        "Ensured cross-browser compatibility and responsive design aligned with accessibility standards",
-      ],
-      technologies: ["React.js", "Microfrontend", "Redux", "REST API"],
-    },
-    {
-      company: "PT. Astra Graphia Information Technology (AGIT)",
-      role: "Web Developer",
-      period: "Mar 2019 - Feb 2022",
-      location: "Jakarta Pusat, Indonesia",
-      description:
-        "AGIT is a Digital Service Provider, provides one stop Solution on Digital Services.",
-      responsibilities: [
-        "Developed frontend and backend applications using React.js, Java Spring Boot, and PostgreSQL",
-        "Worked on projects such as :",
-        "TRAC Service Apps: Improved user experience for managing rental car services.",
-        "Merchant System App: Optimized onboarding processes and merchant portal management.",
-        "Simplified task tracking and team collaboration for internal project management.",
-        "Mentored junior developers, conducted code reviews, fixed bugs, and implemented performance optimization for production-ready applications.",
-      ],
-      technologies: [
-        "React.js",
-        "Redux",
-        "Java Spring Boot",
-        "PostgreSQL",
-        "REST API",
-      ],
-    },
-  ];
-
   return (
-    <section id="experience" className="py-24">
-      <div className="container mx-auto px-4">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          viewport={{ once: true }}
-          className="max-w-6xl mx-auto"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-500 to-purple-500 bg-clip-text text-transparent mb-8 text-center">
-            Experience
-          </h2>
+    <section id="experience" className="py-20 px-6">
+      <div className="max-w-4xl mx-auto">
+        <div className="text-center mb-16">
+          <motion.span
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            className="text-blue-500 font-semibold tracking-wider uppercase text-sm"
+          >
+            My Journey
+          </motion.span>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            className="text-4xl md:text-5xl font-bold mt-2"
+          >
+            Work <span className="gradient-text">Experience</span>
+          </motion.h2>
+        </div>
 
-          {/* Desktop View */}
-          <div className="hidden md:block space-y-8">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-                className="relative pl-8 before:absolute before:left-[7px] before:top-0 before:bottom-0 before:w-0.5 before:bg-blue-200"
-              >
-                <div className="absolute left-0 top-2 w-4 h-4 rounded-full bg-blue-500 shadow-lg" />
-                <div className="bg-white p-6 rounded-lg shadow-lg border border-gray-100">
-                  <div className="flex items-start gap-6">
-                    <div className="flex-shrink-0 p-3 bg-blue-100 rounded-lg">
-                      <FaBriefcase className="text-3xl text-blue-500" />
+        <div className="space-y-12">
+          {experiences.map((exp, index) => (
+            <motion.div
+              key={index}
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ delay: index * 0.1 }}
+              viewport={{ once: true }}
+              className="relative pl-8 md:pl-0"
+            >
+              {/* Timeline Line (Desktop Only) */}
+              <div className="hidden md:block absolute left-[-40px] top-0 bottom-0 w-px bg-border">
+                <div className="sticky top-1/2 w-4 h-4 -left-2 bg-blue-500 rounded-full border-4 border-background shadow-[0_0_15px_rgba(59,130,246,0.5)]" />
+              </div>
+
+              <div className="glass-card p-8 rounded-3xl group">
+                <div className="flex flex-col md:flex-row md:items-center justify-between mb-6 gap-4">
+                  <div>
+                    <h3 className="text-2xl font-bold text-foreground group-hover:text-blue-500 transition-colors">
+                      {exp.role}
+                    </h3>
+                    <div className="flex items-center gap-2 text-blue-500 font-medium mt-1">
+                      <Briefcase size={16} />
+                      {exp.company}
                     </div>
-                    <div className="flex-grow">
-                      <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
-                        <div>
-                          <h3 className="text-xl font-bold text-gray-900">
-                            {exp.role}
-                          </h3>
-                          <p className="text-lg text-blue-600">{exp.company}</p>
-                        </div>
-                        <div className="flex items-center gap-4 text-gray-600 mt-2 md:mt-0">
-                          <span className="flex items-center gap-1">
-                            <FaCalendarAlt className="text-blue-500" />
-                            {exp.period}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <FaMapMarkerAlt className="text-blue-500" />
-                            {exp.location}
-                          </span>
-                        </div>
-                      </div>
+                  </div>
 
-                      <p className="text-gray-400 mb-4">{exp.description}</p>
-                      <ul className="list-disc list-inside space-y-2 text-gray-600 mb-4">
-                        {exp.responsibilities.map((resp, idx) => (
-                          <li key={idx}>{resp}</li>
-                        ))}
-                      </ul>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech, idx) => (
-                          <span
-                            key={idx}
-                            className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
+                  <div className="flex flex-wrap gap-4 text-sm text-muted-foreground">
+                    <div className="flex items-center gap-1.5">
+                      <Calendar size={14} className="text-blue-500" />
+                      {exp.period}
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <MapPin size={14} className="text-blue-500" />
+                      {exp.location}
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            ))}
-          </div>
 
-          {/* Mobile View */}
-          <div className="md:hidden space-y-6">
-            {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
-                className="bg-white rounded-xl shadow-lg overflow-hidden border border-gray-100"
-              >
-                <div className="p-6">
-                  {/* Header */}
-                  <div className="flex flex-col mb-4">
-                    <div className="flex items-center gap-3 mb-2">
-                      <FaBriefcase className="text-2xl text-blue-500 flex-shrink-0" />
-                      <div>
-                        <h3 className="text-xl font-bold text-gray-900">
-                          {exp.role}
-                        </h3>
-                        <p className="text-lg text-blue-600">{exp.company}</p>
-                      </div>
+                <p className="text-muted-foreground mb-6 leading-relaxed">
+                  {exp.description}
+                </p>
+
+                <div className="space-y-3 mb-8">
+                  {exp.responsibilities.map((resp, i) => (
+                    <div
+                      key={i}
+                      className="flex items-start gap-3 text-sm text-muted-foreground"
+                    >
+                      <ChevronRight
+                        size={16}
+                        className="text-blue-500 mt-0.5 flex-shrink-0"
+                      />
+                      <span>{resp}</span>
                     </div>
-
-                    <div className="flex flex-col mt-2 space-y-1">
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <FaCalendarAlt className="text-blue-500" />
-                        <span>{exp.period}</span>
-                      </div>
-                      <div className="flex items-center gap-2 text-gray-600">
-                        <FaMapMarkerAlt className="text-blue-500" />
-                        <span>{exp.location}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Description & Responsibilities */}
-                  <div className="mt-4">
-                    <p className="text-gray-400 mb-4">{exp.description}</p>
-
-                    <div className="space-y-2">
-                      <h4 className="font-semibold text-gray-800">
-                        Key Responsibilities:
-                      </h4>
-                      <ul className="list-none space-y-2">
-                        {exp.responsibilities.map((resp, i) => (
-                          <li key={i} className="flex items-start gap-2">
-                            <span className="text-blue-500 mt-1.5">•</span>
-                            <span className="text-gray-600">{resp}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-
-                    {/* Technologies */}
-                    <div className="mt-4">
-                      <h4 className="font-semibold text-gray-800 mb-2">
-                        Technologies:
-                      </h4>
-                      <div className="flex flex-wrap gap-2">
-                        {exp.technologies.map((tech, idx) => (
-                          <span
-                            key={idx}
-                            className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-sm"
-                          >
-                            {tech}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </div>
+                  ))}
                 </div>
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
+
+                <div className="flex flex-wrap gap-2 pt-6 border-t border-border">
+                  {exp.technologies.map((tech, i) => (
+                    <span
+                      key={i}
+                      className="px-3 py-1 bg-foreground/5 rounded-full text-xs font-medium text-foreground/70"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
       </div>
     </section>
   );

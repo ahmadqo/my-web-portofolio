@@ -39,6 +39,12 @@ export interface Project {
   duration: string;
   year: number;
   slide?: string[];
+  gridSpan?:
+    | "col-span-1"
+    | "col-span-2"
+    | "row-span-1"
+    | "row-span-2"
+    | "col-span-2 row-span-2";
 }
 
 export const projects: Project[] = [
@@ -63,6 +69,7 @@ export const projects: Project[] = [
     duration: "4 months",
     year: 2025,
     featured: true,
+    gridSpan: "col-span-2 row-span-2",
     challenges: [],
     solutions: [],
     impact: [],
@@ -106,6 +113,7 @@ The platform has a microfrontend architecture that allows for independent deploy
     teamSize: 19,
     duration: "36 months",
     year: 2022,
+    gridSpan: "col-span-2",
   },
   {
     id: "tmdb",
